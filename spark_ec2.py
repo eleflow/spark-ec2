@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-from __future__ import division, print_function, with_statement
+
 
 import codecs
 import hashlib
@@ -44,7 +44,8 @@ from optparse import OptionParser
 from sys import stderr
 
 if sys.version < "3":
-    from urllib2 import urlopen, Request, HTTPError
+    from urllib.request import urlopen, Request
+    from urllib.error import HTTPError
 else:
     from urllib.request import urlopen, Request
     from urllib.error import HTTPError
@@ -732,7 +733,7 @@ def launch_cluster(conn, opts, cluster_name):
     additional_tags = {}
     if opts.additional_tags.strip():
         additional_tags = dict(
-            map(str.strip, tag.split(':', 1)) for tag in opts.additional_tags.split(',')
+            list(map(str.strip, tag.split(':', 1))) for tag in opts.additional_tags.split(',')
         )
 
     for master in master_nodes:
@@ -810,7 +811,7 @@ def setup_cluster(conn, master_nodes, slave_nodes, opts, deploy_ssh_key):
                'mapreduce', 'spark-standalone', 'tachyon', 'rstudio']
 
     if opts.hadoop_major_version == "1":
-        modules = list(filter(lambda x: x != "mapreduce", modules))
+        modules = list([x for x in modules if x != "mapreduce"])
 
     if opts.ganglia:
         modules.append('ganglia')
@@ -930,7 +931,7 @@ def wait_for_cluster_state(conn, opts, cluster_instances, cluster_state):
 
         max_batch = 100
         statuses = []
-        for j in xrange(0, len(cluster_instances), max_batch):
+        for j in range(0, len(cluster_instances), max_batch):
             batch = [i.id for i in cluster_instances[j:j + max_batch]]
             statuses.extend(conn.get_all_instance_status(instance_ids=batch))
 
@@ -1058,7 +1059,7 @@ def deploy_files(conn, root_dir, opts, master_nodes, slave_nodes, modules):
         spark_v = "%s|%s" % (opts.spark_git_repo, opts.spark_version)
         tachyon_v = ""
         print("Deploying Spark via git hash; Tachyon won't be set up")
-        modules = filter(lambda x: x != "tachyon", modules)
+        modules = [x for x in modules if x != "tachyon"]
 
     master_addresses = [get_dns_name(i, opts.private_ips) for i in master_nodes]
     slave_addresses = [get_dns_name(i, opts.private_ips) for i in slave_nodes]
@@ -1368,7 +1369,7 @@ def real_main():
             print("ALL DATA ON ALL NODES WILL BE LOST!!")
 
         msg = "Are you sure you want to destroy the cluster {c}? (y/N) ".format(c=cluster_name)
-        response = raw_input(msg)
+        response = input(msg)
         if response == "y":
             print("Terminating master...")
             for inst in master_nodes:
@@ -1440,7 +1441,7 @@ def real_main():
                 ssh_command(opts) + proxy_opt + ['-t', '-t', "%s@%s" % (opts.user, master)])
 
     elif action == "reboot-slaves":
-        response = raw_input(
+        response = input(
             "Are you sure you want to reboot the cluster " +
             cluster_name + " slaves?\n" +
             "Reboot cluster slaves " + cluster_name + " (y/N): ")
@@ -1461,7 +1462,7 @@ def real_main():
             print(get_dns_name(master_nodes[0], opts.private_ips))
 
     elif action == "stop":
-        response = raw_input(
+        response = input(
             "Are you sure you want to stop the cluster " +
             cluster_name + "?\nDATA ON EPHEMERAL DISKS WILL BE LOST, " +
             "BUT THE CLUSTER WILL KEEP USING SPACE ON\n" +
