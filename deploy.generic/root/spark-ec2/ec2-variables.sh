@@ -33,3 +33,6 @@ export METASTORE_USER="{{metastore_user}}"
 export METASTORE_PASSWD="{{metastore_passwd}}"
 export PYSPARK_PYTHON_="{{pyspark_python}}"
 export PYSPARK_DRIVER_PYTHON="{{pyspark_driver_python}}"
+
+export PYSPARK_PYTHON_="python3.6.2"
+export PYSPARK_DRIVER_PYTHON="python3.6.2"

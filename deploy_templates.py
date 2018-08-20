@@ -80,6 +80,8 @@ template_vars = {
   "aws_secret_access_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
   "metastore_user": os.getenv("METASTORE_USER"),
   "metastore_passwd": os.getenv("METASTORE_PASSWD"),
+  "pyspark_python": "python3.6.2",
+  "pyspark_driver_python": "python3.6.2"
 }
 
 template_dir="/root/spark-ec2/templates"

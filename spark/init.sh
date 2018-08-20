@@ -163,6 +163,8 @@ else
 
   echo "Unpacking Spark"
   tar xvzf spark-*.tgz > /tmp/spark-ec2_spark.log
+  tar xvzf spark-*.tgz -C /home/ec2-user
+  chown -R ec2-user:ec2-user /home/ec2-user/spark
   rm -f spark-*.tgz
   mv `ls -d spark-* | grep -v ec2` spark
   echo "Setting up hive metastore"
@@ -173,7 +175,14 @@ else
   tar -xzvf mysql-connector-java-5.1.34.tar.gz mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar
   #install mysql server connector
   cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar  spark/lib
-
+  mkdir /home/ec2-user/lib
+  cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar  /home/ec2-user/lib
+  chown -R ec2-user:ec2-user /home/ec2-user/lib
+  mkdir /mnt/spark
+  mkdir -p /mnt2/spark
+  chown -R ec2-user:ec2-user /mnt/spark
+  chown -R ec2-user:ec2-user /mnt2/spark
+  echo "PATH=$PATH:$HOME/spark/bin:$HOME/mysql-connector-java-5.1.34" > /home/ec2-user/.bash_profile
   ln -s /root/spark /opt/spark
 fi
 
