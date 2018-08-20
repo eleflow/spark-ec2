@@ -164,7 +164,7 @@ else
   echo "Unpacking Spark"
   tar xvzf spark-*.tgz > /tmp/spark-ec2_spark.log
   tar xvzf spark-*.tgz -C /home/ec2-user
-  chown -R ec2-user:ec2-user /home/ec2-user/spark
+  ln -s /home/ec2-user/spark-2.1.2-bin-uberdata/ /home/ec2-user/spark
   rm -f spark-*.tgz
   mv `ls -d spark-* | grep -v ec2` spark
   echo "Setting up hive metastore"
@@ -177,13 +177,14 @@ else
   cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar  spark/lib
   mkdir /home/ec2-user/lib
   cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar  /home/ec2-user/lib
-  chown -R ec2-user:ec2-user /home/ec2-user/lib
   mkdir /mnt/spark
   mkdir -p /mnt2/spark
   chown -R ec2-user:ec2-user /mnt/spark
   chown -R ec2-user:ec2-user /mnt2/spark
-  echo "PATH=$PATH:$HOME/spark/bin:$HOME/mysql-connector-java-5.1.34" > /home/ec2-user/.bash_profile
+  echo "PATH=$PATH:$HOME/spark/bin:$HOME/mysql-connector-java-5.1.34" >>  /home/ec2-user/.bash_profile
   ln -s /root/spark /opt/spark
+  cp /root/spark-ec2/ec2-variables.sh /home/ec2-user/
+  chown -R  ec2-user:ec2-user /home/ec2-user/
 fi
 
 popd > /dev/null
