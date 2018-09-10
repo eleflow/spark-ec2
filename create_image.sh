@@ -97,4 +97,4 @@ sudo yum install -y ./MySQL-*
 
 wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz
 wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
-wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-2.1.2-bin-2.6.0-cdh5.4.2.tgz
+wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-2.1.2-bin-2.6.0-cdh5.11.2.tgz

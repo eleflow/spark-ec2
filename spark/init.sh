@@ -141,15 +141,15 @@ else
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2"  ]] ; then
-        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz" ]]; then 
+        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz" ]]; then
           rm -f spark-*.tgz
-          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
+          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz
         fi
         wget -O hive-schema-mysql.sql https://s3-us-west-2.amazonaws.com/uberdata-public/hive/scripts/mysql/hive-schema-0.13.0.mysql.sql
       elif [[ "$HADOOP_MAJOR_VERSION" == "yarn"  ]] ; then
-        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz" ]]; then
+        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz" ]]; then
           rm -f spark-*.tgz
-          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
+          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz
         fi
         wget -O hive-schema-mysql.sql https://s3-us-west-2.amazonaws.com/uberdata-public/hive/scripts/mysql/hive-schema-0.13.0.mysql.sql
       else
