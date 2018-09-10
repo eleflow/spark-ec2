@@ -164,7 +164,7 @@ else
   echo "Unpacking Spark"
   tar xvzf spark-*.tgz > /tmp/spark-ec2_spark.log
   tar xvzf spark-*.tgz -C /home/ec2-user
-  ln -s /home/ec2-user/spark-2.1.2-bin-uberdata/ /home/ec2-user/spark
+  ln -s /home/ec2-user/spark-$SPARK_VERSION-bin-uberdata/ /home/ec2-user/spark
   rm -f spark-*.tgz
   mv `ls -d spark-* | grep -v ec2` spark
   echo "Setting up hive metastore"
