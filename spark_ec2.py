@@ -62,7 +62,7 @@ else:
     xrange = range
 
 
-SPARK_EC2_VERSION = "2.1.2"
+SPARK_EC2_VERSION = "2.1.3"
 DEFAULT_SPARK_VERSION=SPARK_EC2_VERSION
 SPARK_EC2_DIR = "/opt/spark"
 
@@ -96,7 +96,8 @@ VALID_SPARK_VERSIONS = set([
     "2.0.1",
     "2.0.2",
     "2.1.0",
-    "2.1.2"
+    "2.1.2",
+    "2.1.3"
 ])
 
 SPARK_TACHYON_MAP = {
