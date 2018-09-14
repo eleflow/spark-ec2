@@ -90,6 +90,9 @@ echo 'readlink -e "$@"' >> /usr/bin/realpath
 chmod a+x /usr/bin/realpath
 mv /root/hadoop-native /root/hadoop-native-2.6
 
+sudo usr/local/bin/pip3 install requests
+
+
 sudo yum remove -y mariadb-libs
 wget https://downloads.mysql.com/archives/get/file/MySQL-5.1.72-1.glibc23.x86_64.rpm-bundle.tar
 tar -xvf MySQL-5.1.72-1.glibc23.x86_64.rpm-bundle.tar
