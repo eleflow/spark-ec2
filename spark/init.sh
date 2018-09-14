@@ -13,7 +13,7 @@ then
   mkdir spark
   pushd spark > /dev/null
   git init
-  repo=`python -c "print '$SPARK_VERSION'.split('|')[0]"`
+  repo=`python -c "print '$SPARK_VERSION'.split('|')[0]"` 
   git_hash=`python -c "print '$SPARK_VERSION'.split('|')[1]"`
   git remote add origin $repo
   git fetch origin
@@ -23,7 +23,7 @@ then
   popd > /dev/null
 
 # Pre-packaged spark version:
-else
+else 
   case "$SPARK_VERSION" in
     0.7.3)
       rm -f spark-*.tgz
@@ -32,7 +32,7 @@ else
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.7.3-prebuilt-cdh4.tgz
       fi
-      ;;
+      ;;    
     0.8.0)
       rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
@@ -40,7 +40,7 @@ else
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.8.0-incubating-bin-cdh4.tgz
       fi
-      ;;
+      ;;    
     0.8.1)
       rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
@@ -48,7 +48,7 @@ else
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.8.1-incubating-bin-cdh4.tgz
       fi
-      ;;
+      ;;    
     0.9.0)
       rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
@@ -164,7 +164,7 @@ else
   echo "Unpacking Spark"
   tar xvzf spark-*.tgz > /tmp/spark-ec2_spark.log
   tar xvzf spark-*.tgz -C /home/ec2-user
-  ln -s /home/ec2-user/spark-2.1.3-bin-uberdata/ /home/ec2-user/spark
+  ln -s /home/ec2-user/spark-$SPARK_VERSION-bin-uberdata/ /home/ec2-user/spark
   rm -f spark-*.tgz
   mv `ls -d spark-* | grep -v ec2` spark
   echo "Setting up hive metastore"
@@ -174,18 +174,14 @@ else
   fi
   tar -xzvf mysql-connector-java-5.1.34.tar.gz mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar
   #install mysql server connector
-  echo "mysql"
   cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar  spark/lib
   mkdir /home/ec2-user/jars
   cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar /home/ec2-user/jars
-  echo "mnt spark folders"
   mkdir /mnt/spark
   mkdir -p /mnt2/spark
   chown -R ec2-user:ec2-user /mnt/spark
   chown -R ec2-user:ec2-user /mnt2/spark
-
   sed -i "\$i $('echo "PATH=$PATH:/home/ec2-user/spark/bin:/home/ec2-user/mysql-connector-java-5.1.34"')" /home/ec2-user/.bash_profile
-  echo "spark root"
   ln -s /root/spark /opt/spark
   cp /root/spark-ec2/ec2-variables.sh /home/ec2-user/
   chown -R  ec2-user:ec2-user /home/ec2-user/
