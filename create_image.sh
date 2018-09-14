@@ -54,7 +54,8 @@ done
 cd /tmp
 wget "http://archive.apache.org/dist/maven/maven-3/3.2.3/binaries/apache-maven-3.2.3-bin.tar.gz"
 tar xvzf apache-maven-3.2.3-bin.tar.gz
-mv apache-maven-3.2.3 /opt/
+cp -r apache-maven-3.2.3 /opt/
+rm -rf apache-maven-3.2.3
 
 # Edit bash profile
 echo "export PS1=\"\\u@\\h \\W]\\$ \"" >> ~/.bash_profile
@@ -96,5 +97,5 @@ sudo yum install -y ./MySQL-*
 /sbin/chkconfig mysql off
 
 wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz
-wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
-wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-2.1.2-bin-2.6.0-cdh5.4.2.tgz
+wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.11.2.tar.gz
+wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-2.1.3-bin-2.6.0-cdh5.11.2.tgz

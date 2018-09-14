@@ -13,7 +13,7 @@ then
   mkdir spark
   pushd spark > /dev/null
   git init
-  repo=`python -c "print '$SPARK_VERSION'.split('|')[0]"` 
+  repo=`python -c "print '$SPARK_VERSION'.split('|')[0]"`
   git_hash=`python -c "print '$SPARK_VERSION'.split('|')[1]"`
   git remote add origin $repo
   git fetch origin
@@ -23,7 +23,7 @@ then
   popd > /dev/null
 
 # Pre-packaged spark version:
-else 
+else
   case "$SPARK_VERSION" in
     0.7.3)
       rm -f spark-*.tgz
@@ -32,7 +32,7 @@ else
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.7.3-prebuilt-cdh4.tgz
       fi
-      ;;    
+      ;;
     0.8.0)
       rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
@@ -40,7 +40,7 @@ else
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.8.0-incubating-bin-cdh4.tgz
       fi
-      ;;    
+      ;;
     0.8.1)
       rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
@@ -48,7 +48,7 @@ else
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.8.1-incubating-bin-cdh4.tgz
       fi
-      ;;    
+      ;;
     0.9.0)
       rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
@@ -141,15 +141,15 @@ else
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2"  ]] ; then
-        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz" ]]; then 
+        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz" ]]; then
           rm -f spark-*.tgz
-          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
+          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz
         fi
         wget -O hive-schema-mysql.sql https://s3-us-west-2.amazonaws.com/uberdata-public/hive/scripts/mysql/hive-schema-0.13.0.mysql.sql
       elif [[ "$HADOOP_MAJOR_VERSION" == "yarn"  ]] ; then
-        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz" ]]; then
+        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz" ]]; then
           rm -f spark-*.tgz
-          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
+          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.11.2.tgz
         fi
         wget -O hive-schema-mysql.sql https://s3-us-west-2.amazonaws.com/uberdata-public/hive/scripts/mysql/hive-schema-0.13.0.mysql.sql
       else
@@ -164,7 +164,7 @@ else
   echo "Unpacking Spark"
   tar xvzf spark-*.tgz > /tmp/spark-ec2_spark.log
   tar xvzf spark-*.tgz -C /home/ec2-user
-  ln -s /home/ec2-user/spark-2.1.2-bin-uberdata/ /home/ec2-user/spark
+  ln -s /home/ec2-user/spark-2.1.3-bin-uberdata/ /home/ec2-user/spark
   rm -f spark-*.tgz
   mv `ls -d spark-* | grep -v ec2` spark
   echo "Setting up hive metastore"
